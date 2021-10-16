@@ -1,0 +1,213 @@
+nav {
+  position: fixed;
+  top: 1.875rem;
+  padding: 0 1.875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 2;
+  overflow: hidden;
+
+  @include breakpoint-up("medium") {
+    display: none;
+  }
+
+  &.active a {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .btn-menu,
+  .btn-close {
+    width: 1.875rem;
+    height: 1.875rem;
+    display: flex;
+    cursor: pointer;
+    span {
+      width: 100%;
+      height: 1px;
+      background: #000;
+    }
+  }
+
+  .btn-menu {
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    @include breakpoint-up("medium") {
+      display: none;
+    }
+
+    &.active {
+      transform: translateX(2rem);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .btn-close {
+    position: absolute;
+    right: 3.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    &.active {
+      pointer-events: all;
+      opacity: 1;
+      transform: translateX(1.875rem);
+      transition: transform 0.5s ease-in-out, opacity 0.7s ease-in-out;
+    }
+    span {
+      position: absolute;
+      top: 50%;
+    }
+    & :first-child {
+      position: absolute;
+      transform: rotate(45deg);
+    }
+    & :last-child {
+      transform: rotate(-45deg);
+    }
+  }
+}
+.menu {
+  width: 100%;
+  font-family: Cabin, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  height: 0;
+
+  &.active {
+    position: fixed;
+    opacity: 1;
+    pointer-events: all;
+    height: 100vh;
+    overflow-y: scroll;
+    transition: opacity 0.5s ease-in-out;
+    &.fade {
+      animation: fade 0.5s ease-in-out forwards;
+    }
+
+    .option.selected {
+      transform: scale(2);
+      z-index: 1;
+      transition: transform 0.3s linear;
+      & span {
+        animation: fade 1s ease-in-out forwards;
+      }
+    }
+
+    & .wrapper .about {
+      animation: showIn 0.1s ease-in-out forwards;
+      &.selected {
+        transform-origin: top left;
+      }
+    }
+    & .wrapper .food {
+      animation: showIn 0.3s ease-in-out forwards;
+      &.selected {
+        transform-origin: top right;
+      }
+    }
+    & .wrapper .retail {
+      animation: showIn 0.65s ease-in-out forwards;
+      &.selected {
+        transform-origin: left bottom;
+      }
+    }
+    & .wrapper .community {
+      animation: showIn 0.96s ease-in-out forwards;
+      &.selected {
+        transform-origin: right bottom;
+      }
+    }
+    & .menu-info {
+      animation: showIn 1.2s ease-in-out forwards;
+    }
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 85vh;
+    position: relative;
+    .option {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      font-size: 1.25rem;
+      position: absolute;
+      width: 50%;
+      height: 50%;
+
+      &.about {
+        left: 0;
+        top: 0;
+      }
+      &.food {
+        right: 0;
+        top: 0;
+      }
+      &.retail {
+        left: 0;
+        bottom: 0;
+      }
+      &.community {
+        right: 0;
+        bottom: 0;
+      }
+
+      &.about > span {
+        transform: rotate(-45deg);
+      }
+      &.food > span {
+        transform: rotate(45deg);
+      }
+      &.retail > span {
+        transform: rotate(45deg);
+      }
+      &.community > span {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  .menu-info {
+    padding: 1.875rem;
+    background: white;
+    .btn,
+    .direction {
+      margin-bottom: 1.875rem;
+      font-size: 1rem;
+      p {
+        line-height: 1.3125rem;
+        letter-spacing: 1.5px;
+      }
+    }
+
+    .email {
+      a {
+        text-decoration: underline;
+        font-size: 0.875rem;
+      }
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 1.875rem;
+      margin-top: 1.875rem;
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 1.5625rem;
+          height: 1.5625rem;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}

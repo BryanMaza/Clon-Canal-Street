@@ -1,0 +1,256 @@
+.community {
+  background: #ffb400;
+  overflow: hidden;
+
+  .content {
+    .schedule {
+      margin: 0;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 3rem;
+      p {
+        max-width: 22ch;
+      }
+    }
+    .service {
+      .service__img {
+        @include breakpoint-up("medium") {
+          display: none;
+        }
+      }
+    }
+    .events {
+      margin-bottom: 3.75rem;
+      position: relative;
+      &-title {
+        text-align: center;
+        margin-bottom: 3.75rem;
+      }
+      .events-title {
+        margin: 0;
+        @include breakpoint-up("medium") {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      .events-list {
+        margin-bottom: 4.75rem;
+        @include breakpoint-up("medium") {
+          grid-template-columns: repeat(4, 1fr);
+          margin: 0 3.75rem;
+          grid-gap: 3.75rem;
+          padding: 0;
+          background-image: none;
+        }
+        .event-box {
+          background-image: repeating-linear-gradient(
+            -74deg,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5) 1px,
+            transparent 0,
+            transparent 8px
+          );
+          background-position: 0 0;
+          background-repeat: repeat-x;
+          background-size: 100% 22px;
+          &:last-child {
+            background-image: repeating-linear-gradient(
+                -74deg,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5) 1px,
+                transparent 0,
+                transparent 8px
+              ),
+              repeating-linear-gradient(
+                -74deg,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5) 1px,
+                transparent 0,
+                transparent 8px
+              );
+            background-position: 0 0, 0 100%;
+            background-size: 100% 22px, 100% 22px;
+          }
+
+          @include breakpoint-up("medium") {
+            padding: 5rem 0 3.75rem;
+            width: 100%;
+          }
+          &:nth-child(5) {
+            background-image: repeating-linear-gradient(
+                -74deg,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5) 1px,
+                transparent 0,
+                transparent 8px
+              ),
+              repeating-linear-gradient(
+                -74deg,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.5) 1px,
+                transparent 0,
+                transparent 8px
+              );
+            background-position: 0 0, 100% 100%;
+            background-size: 100% 22px, 100% 22px;
+          }
+          &.empty {
+            display: none;
+            @include breakpoint-up("medium") {
+              display: block;
+
+              &:nth-child(6),
+              &:nth-child(7) {
+                background-position: 0 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+    & > .btn {
+      margin: 0 1.875rem;
+      width: auto;
+      margin-bottom: 4rem;
+      @include breakpoint-up("medium") {
+        max-width: 100%;
+        margin: 0 3.75rem;
+        margin-bottom: 7.5rem;
+      }
+      @include breakpoint-up("large") {
+        max-width: 100%;
+      }
+    }
+    .community__features {
+      margin-bottom: 3.75rem;
+      padding: 0 1.875rem;
+      @include breakpoint-up("medium") {
+        padding: 0 3.75rem 3.75rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.25rem 3.75rem;
+      }
+      h2 {
+        margin-bottom: 3.75rem;
+        @include breakpoint-up("medium") {
+          text-align: left;
+          grid-column: 1 / 3;
+        }
+      }
+      .feature {
+        height: 28.3rem;
+        margin-bottom: 3.75rem;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .img-desc {
+          position: absolute;
+          left: 20px;
+          bottom: -30px;
+          h3 {
+            border-left: 10px solid #fff;
+
+            & > span {
+              border-right: 10px solid #fff;
+              background-color: #fff;
+              padding: 18px 0 10px 0;
+              & > span {
+                line-height: 30px;
+                position: relative;
+                font-size: 1.875rem;
+                font-weight: 400;
+                @include breakpoint-up("medium") {
+                  font-size: 2.8125rem;
+                }
+              }
+            }
+          }
+        }
+      }
+      .btn {
+        margin-top: 6.75rem;
+      }
+    }
+    .community__offer {
+      .offer {
+        margin-bottom: 0;
+        background-position: top;
+        animation: moveBorderBgRight 2s linear infinite;
+        @include breakpoint-up("medium") {
+          background-image: repeating-linear-gradient(
+              -45deg,
+              #000,
+              #000 1px,
+              transparent 0,
+              transparent 71px
+            ),
+            repeating-linear-gradient(
+              45deg,
+              #000,
+              #000 1px,
+              transparent 0,
+              transparent 70px
+            );
+          background-position: 0 0, 0 0;
+          background-size: 100px 50px, 100px 50px;
+          background-repeat: repeat-x;
+          padding: 6.5rem 0 3.75rem;
+        }
+        .emote {
+          img {
+            width: 7.25rem;
+            height: 8.68rem;
+          }
+        }
+        .offer-info {
+          margin: 3.75rem 0;
+          @include breakpoint-up("medium") {
+            margin: 0;
+            h1,
+            p {
+              margin: 0;
+            }
+          }
+          h1 {
+            margin-bottom: 1.875rem;
+          }
+          p {
+            letter-spacing: 1px;
+          }
+        }
+      }
+      .events-list {
+        @include breakpoint-up("medium") {
+          margin: 0 3.75rem;
+        }
+        .event-box {
+          width: 100%;
+          p {
+            max-width: 18ch;
+          }
+        }
+        .btn {
+          margin: 0;
+          background: #ffb400;
+          width: 11.25rem;
+          padding: 1.25rem;
+        }
+      }
+    }
+    .contact {
+      .social-media-box {
+        p {
+          margin: 0.9rem auto 0;
+          max-width: 13ch;
+          max-width: 0 auto;
+        }
+      }
+    }
+  }
+}
