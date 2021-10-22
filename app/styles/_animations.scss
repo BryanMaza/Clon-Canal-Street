@@ -101,6 +101,12 @@
   }
 }
 
-.fadeIn {
-  animation: fadeIn 0.3s linear forwards;
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
 }

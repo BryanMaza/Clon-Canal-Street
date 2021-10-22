@@ -1,4 +1,13 @@
 @import "variables";
 .food {
   background: #5ea3ec;
+  .banner {
+    background: #5ea3ec;
+  }
+
+  &.menus.inactive.slide .banner {
+    @include breakpoint-up("medium") {
+      animation: slideDown 0.9s ease-in-out;
+    }
+  }
 }

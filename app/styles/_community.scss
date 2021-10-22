@@ -1,7 +1,14 @@
 .community {
   background: #ffb400;
   overflow: hidden;
-
+  .banner {
+    background: #ffb400;
+  }
+  &.menus.inactive.slide .banner {
+    @include breakpoint-up("medium") {
+      animation: slideDown 0.3s ease-in-out;
+    }
+  }
   .content {
     .schedule {
       margin: 0;

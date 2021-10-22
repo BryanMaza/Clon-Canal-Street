@@ -28,6 +28,12 @@ body {
   opacity: 1;
   transition: opacity 0.4s ease-in-out;
 }
+.fadeIn {
+  animation: fadeIn 0.3s linear forwards;
+  @include breakpoint-up("medium") {
+    animation: none;
+  }
+}
 
 .title-hero {
   font-size: 3.75rem;
@@ -65,6 +71,25 @@ body {
   }
 }
 
+.item-img,
+.retail-img {
+  position: absolute;
+  background-image: url("../images/food1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0;
+  width: 65%;
+  height: 65%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+
+  &.hover {
+    opacity: 1;
+    transition: opacity 0.7s ease-in-out;
+  }
+}
+
 img {
   width: 100%;
 }
@@ -79,14 +104,19 @@ img {
     .banner {
       display: none;
       padding: 3.75rem 0.5rem;
+      width: 3.75rem;
     }
     &.active {
       display: block;
+
       @include breakpoint-up("medium") {
         width: 100%;
         & .banner {
           opacity: 0;
-          transition: opacity 0.3s ease-in-out;
+        }
+        & .content {
+          opacity: 1;
+          transition: opacity 0.25s ease-in-out;
         }
       }
     }
@@ -109,6 +139,10 @@ img {
 
     @include breakpoint-up("medium") {
       padding: 0;
+    }
+    &.inactive.slide {
+      background: transparent;
+      transition: none !important;
     }
     .banner {
       @include breakpoint-up("medium") {
@@ -133,6 +167,10 @@ img {
     .content {
       transition: opacity 0.4s ease-in-out;
       position: relative;
+      @include breakpoint-up("medium") {
+        opacity: 0;
+      }
+
       .name-section {
         display: none;
         font-family: Cabin, sans-serif;
@@ -221,7 +259,7 @@ img {
           }
         }
       }
-      .menu-food {
+      .food-items {
         padding: 0 1.75rem;
         margin-bottom: 6.25rem;
         @include breakpoint-up("medium") {
@@ -229,18 +267,25 @@ img {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           grid-gap: 3.75rem;
+          position: relative;
         }
         .item {
           margin-bottom: 1.875rem;
+          @include breakpoint-up("medium") {
+            z-index: 2;
+          }
+
           &__desc {
             font-size: 1rem;
             margin-bottom: 0.625rem;
             font-family: Cabin, sans-serif;
+            pointer-events: none;
             @include breakpoint-up("medium") {
               margin-bottom: 1.875rem;
             }
           }
           &__title {
+            pointer-events: none;
             font-size: 2rem;
           }
         }
@@ -280,7 +325,7 @@ img {
         background-position: 0 100%, 0 100%, 0 0, 0 0;
         background-size: 29px 14px, 29px 14px, 29px 14px, 29px 14px;
         background-repeat: repeat-x;
-        animation: moveBackground 2s linear infinite;
+        animation: moveBgRight 2s linear infinite;
 
         @include breakpoint-up("medium") {
           display: grid;
@@ -491,6 +536,7 @@ img {
       text-align: center;
       padding: 1.875rem;
       font-size: 0.875rem;
+      margin-bottom: 1.875rem;
       background-image: linear-gradient(90deg, #000 50%, transparent 0),
         linear-gradient(90deg, #000 50%, transparent 0),
         linear-gradient(180deg, #000 50%, transparent 0),
@@ -513,6 +559,7 @@ img {
       }
       .mobile-options {
         display: block;
+        margin-bottom: 1rem;
         @include breakpoint-up("medium") {
           display: none;
         }
@@ -538,6 +585,39 @@ img {
         }
         .newsletter {
           display: none;
+        }
+        form {
+          position: relative;
+
+          &::after {
+            content: "\21E3";
+            opacity: 1;
+            position: absolute;
+            color: #000;
+            top: 1rem;
+            right: 1.75rem;
+            transform: rotate(-90deg);
+            font-size: 1.45rem;
+          }
+          input[type="text"] {
+            width: 100%;
+            padding: 1.25rem;
+            font-family: Cabin, sans-serif;
+            font-size: 0.875rem;
+            z-index: 1;
+            background: transparent;
+            outline: none;
+            border: 1px solid #000;
+            &::placeholder {
+              color: #000;
+            }
+          }
+          input[type="submit"] {
+            position: absolute;
+            opacity: 0;
+            right: 1.25rem;
+            top: 1.45rem;
+          }
         }
       }
 

@@ -205,9 +205,26 @@
   }
 }
 
-.fadeIn {
-  -webkit-animation: fadeIn 0.3s linear forwards;
-          animation: fadeIn 0.3s linear forwards;
+@-webkit-keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  to {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
 }
 
 nav {
@@ -522,6 +539,17 @@ nav .btn-close :last-child {
   background: #5ea3ec;
 }
 
+.food .banner {
+  background: #5ea3ec;
+}
+
+@media (min-width: 1024px) {
+  .food.menus.inactive.slide .banner {
+    -webkit-animation: slideDown 0.9s ease-in-out;
+            animation: slideDown 0.9s ease-in-out;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -557,6 +585,18 @@ body.locked {
   opacity: 1;
   -webkit-transition: opacity 0.4s ease-in-out;
   transition: opacity 0.4s ease-in-out;
+}
+
+.fadeIn {
+  -webkit-animation: fadeIn 0.3s linear forwards;
+          animation: fadeIn 0.3s linear forwards;
+}
+
+@media (min-width: 1024px) {
+  .fadeIn {
+    -webkit-animation: none;
+            animation: none;
+  }
 }
 
 .title-hero {
@@ -602,6 +642,28 @@ body.locked {
   }
 }
 
+.item-img,
+.retail-img {
+  position: absolute;
+  background-image: url("../images/food1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0;
+  width: 65%;
+  height: 65%;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.7s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
+}
+
+.item-img.hover,
+.retail-img.hover {
+  opacity: 1;
+  -webkit-transition: opacity 0.7s ease-in-out;
+  transition: opacity 0.7s ease-in-out;
+}
+
 img {
   width: 100%;
 }
@@ -623,6 +685,7 @@ img {
 .container .menus .banner {
   display: none;
   padding: 3.75rem 0.5rem;
+  width: 3.75rem;
 }
 
 .container .menus.active {
@@ -635,8 +698,11 @@ img {
   }
   .container .menus.active .banner {
     opacity: 0;
-    -webkit-transition: opacity 0.3s ease-in-out;
-    transition: opacity 0.3s ease-in-out;
+  }
+  .container .menus.active .content {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
   }
 }
 
@@ -662,6 +728,12 @@ img {
   .container .menus {
     padding: 0;
   }
+}
+
+.container .menus.inactive.slide {
+  background: transparent;
+  -webkit-transition: none !important;
+  transition: none !important;
 }
 
 @media (min-width: 1024px) {
@@ -692,6 +764,12 @@ img {
   -webkit-transition: opacity 0.4s ease-in-out;
   transition: opacity 0.4s ease-in-out;
   position: relative;
+}
+
+@media (min-width: 1024px) {
+  .container .menus .content {
+    opacity: 0;
+  }
 }
 
 .container .menus .content .name-section {
@@ -824,39 +902,48 @@ img {
   }
 }
 
-.container .menus .content .menu-food {
+.container .menus .content .food-items {
   padding: 0 1.75rem;
   margin-bottom: 6.25rem;
 }
 
 @media (min-width: 1024px) {
-  .container .menus .content .menu-food {
+  .container .menus .content .food-items {
     padding: 0 3.75rem;
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: (1fr)[3];
         grid-template-columns: repeat(3, 1fr);
     grid-gap: 3.75rem;
+    position: relative;
   }
 }
 
-.container .menus .content .menu-food .item {
+.container .menus .content .food-items .item {
   margin-bottom: 1.875rem;
 }
 
-.container .menus .content .menu-food .item__desc {
+@media (min-width: 1024px) {
+  .container .menus .content .food-items .item {
+    z-index: 2;
+  }
+}
+
+.container .menus .content .food-items .item__desc {
   font-size: 1rem;
   margin-bottom: 0.625rem;
   font-family: Cabin, sans-serif;
+  pointer-events: none;
 }
 
 @media (min-width: 1024px) {
-  .container .menus .content .menu-food .item__desc {
+  .container .menus .content .food-items .item__desc {
     margin-bottom: 1.875rem;
   }
 }
 
-.container .menus .content .menu-food .item__title {
+.container .menus .content .food-items .item__title {
+  pointer-events: none;
   font-size: 2rem;
 }
 
@@ -868,8 +955,8 @@ img {
   background-position: 0 100%, 0 100%, 0 0, 0 0;
   background-size: 29px 14px, 29px 14px, 29px 14px, 29px 14px;
   background-repeat: repeat-x;
-  -webkit-animation: moveBackground 2s linear infinite;
-          animation: moveBackground 2s linear infinite;
+  -webkit-animation: moveBgRight 2s linear infinite;
+          animation: moveBgRight 2s linear infinite;
 }
 
 @media (min-width: 1024px) {
@@ -1100,6 +1187,7 @@ img {
   text-align: center;
   padding: 1.875rem;
   font-size: 0.875rem;
+  margin-bottom: 1.875rem;
   background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #000), color-stop(0, transparent)), -webkit-gradient(linear, left top, right top, color-stop(50%, #000), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(50%, #000), color-stop(0, transparent)), -webkit-gradient(linear, left top, left bottom, color-stop(50%, #000), color-stop(0, transparent));
   background-image: linear-gradient(90deg, #000 50%, transparent 0), linear-gradient(90deg, #000 50%, transparent 0), linear-gradient(180deg, #000 50%, transparent 0), linear-gradient(180deg, #000 50%, transparent 0);
   background-position: 0 0, 0 100%, 0 0, 100% 0;
@@ -1126,6 +1214,7 @@ img {
 
 .contact .social-media .social-media-box .mobile-options {
   display: block;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 1024px) {
@@ -1167,6 +1256,56 @@ img {
 
 .contact .social-media .social-media-box:last-child .newsletter {
   display: none;
+}
+
+.contact .social-media .social-media-box:last-child form {
+  position: relative;
+}
+
+.contact .social-media .social-media-box:last-child form::after {
+  content: "\21E3";
+  opacity: 1;
+  position: absolute;
+  color: #000;
+  top: 1rem;
+  right: 1.75rem;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  font-size: 1.45rem;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="text"] {
+  width: 100%;
+  padding: 1.25rem;
+  font-family: Cabin, sans-serif;
+  font-size: 0.875rem;
+  z-index: 1;
+  background: transparent;
+  outline: none;
+  border: 1px solid #000;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="text"]::-webkit-input-placeholder {
+  color: #000;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="text"]:-ms-input-placeholder {
+  color: #000;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="text"]::-ms-input-placeholder {
+  color: #000;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="text"]::placeholder {
+  color: #000;
+}
+
+.contact .social-media .social-media-box:last-child form input[type="submit"] {
+  position: absolute;
+  opacity: 0;
+  right: 1.25rem;
+  top: 1.45rem;
 }
 
 .contact .social-media .social-media-box img {
@@ -1280,14 +1419,17 @@ img {
   transition: all 0.3s linear;
 }
 
+@media (min-width: 1024px) {
+  .about.menus.inactive.slide .banner {
+    -webkit-animation: slideDown 0.9s ease-in-out;
+            animation: slideDown 0.9s ease-in-out;
+  }
+}
+
 .about .banner {
   display: none;
   -webkit-transition: all 0.3s linear;
   transition: all 0.3s linear;
-}
-
-.about .content {
-  z-index: -1;
 }
 
 .about .content .hero-section {
@@ -1496,6 +1638,16 @@ img {
   }
 }
 
+.about .content .about .direction .map {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .about .content .about .direction .map {
+    display: block;
+  }
+}
+
 .about .content .about .direction .map img {
   display: none;
 }
@@ -1518,9 +1670,31 @@ img {
   background: #f64444;
 }
 
+.retail .banner {
+  background: #f64444;
+}
+
+@media (min-width: 1024px) {
+  .retail.menus.inactive.slide .banner {
+    -webkit-animation: slideDown 0.6s ease-in-out;
+            animation: slideDown 0.6s ease-in-out;
+  }
+}
+
 .community {
   background: #ffb400;
   overflow: hidden;
+}
+
+.community .banner {
+  background: #ffb400;
+}
+
+@media (min-width: 1024px) {
+  .community.menus.inactive.slide .banner {
+    -webkit-animation: slideDown 0.3s ease-in-out;
+            animation: slideDown 0.3s ease-in-out;
+  }
 }
 
 .community .content .schedule {

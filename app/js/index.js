@@ -21,9 +21,7 @@ const closeMenu = () => {
   btnMenu.classList.remove("active");
   closeX.classList.remove("active");
   menu.classList.remove("active");
-
   nav.classList.remove("active");
-  container.classList.remove("none");
   document.body.classList.remove("locked");
   isMenuOpen = false;
 };
@@ -85,12 +83,10 @@ const showContainerSelected = (containers, i) => {
   containers.forEach((container, index) => {
     container.classList.add("inactive");
     container.classList.remove("active");
-
+    container.lastElementChild.style.opacity = "0";
     if (index === i) {
       container.classList.add("active");
       container.classList.remove("inactive");
-      container.lastElementChild.style.opacity = "0";
-
       setTimeout(() => {
         container.lastElementChild.style.opacity = "1";
       }, 550);
@@ -108,9 +104,56 @@ const showContainerSelectedDesktop = () => {
   });
 };
 
-const showImagesWithHover = () => {
-  const dishes = document.querySelectorAll(".item");
-  console.log(dishes);
+const showImagesMenu = () => {
+  const dishes = document.querySelectorAll(".item-food");
+  const retail = document.querySelectorAll(".item-retail");
+  showImageHover(dishes, "food");
+  showImageHover(retail, "retail", "jpg");
+};
+
+const showImageHover = (items, section, extension = "png") => {
+  const itemImg = document.querySelector(".item-img");
+  const retailItem = document.querySelector(".retail-img");
+  items.forEach((item, i) => {
+    item.addEventListener("mouseover", () => {
+      let randomTop = Math.floor(Math.random() * (70 - 0));
+      let randomLeft = Math.floor(Math.random() * (70 - 0));
+      if (section === "food") {
+        itemImg.classList.add("hover");
+        itemImg.style.backgroundImage = `url('./app/images/${section}${
+          i + 1
+        }.${extension}')`;
+        itemImg.style.top = `${randomTop}%`;
+        itemImg.style.left = `${randomLeft}%`;
+      } else {
+        retailItem.classList.add("hover");
+        retailItem.style.backgroundImage = `url('./app/images/${section}${
+          i + 1
+        }.${extension}')`;
+        retailItem.style.top = `${randomTop}%`;
+        retailItem.style.left = `${randomLeft}%`;
+      }
+    });
+    if (section === "food") {
+      item.addEventListener("mouseout", () => {
+        itemImg.classList.remove("hover");
+      });
+    }
+    item.addEventListener("mouseout", () => {
+      retailItem.classList.remove("hover");
+    });
+  });
+};
+
+const addAnimationsContainer = () => {
+  containers.forEach((container) => {
+    container.classList.add("slide");
+  });
+  setTimeout(() => {
+    containers.forEach((container) => {
+      container.classList.remove("slide");
+    });
+  }, 1200);
 };
 
 function init() {
@@ -119,7 +162,8 @@ function init() {
     closeX.addEventListener("click", btnMenuHandler);
     addFadeInImages();
     showContainerSelectedDesktop();
-    showImagesWithHover();
+    showImagesMenu();
+    addAnimationsContainer();
     window.addEventListener("scroll", () => {
       if (window.scrollY > 0) {
         addFadeInImages();
